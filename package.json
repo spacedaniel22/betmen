@@ -1,0 +1,32 @@
+{
+  "name": "betmen",
+  "private": true,
+  "scripts": {
+    "start": "meteor run --port 5000",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.8.4",
+    "bcrypt": "^5.0.0",
+    "meteor-node-stubs": "^1.0.0",
+    "svelte": "^3.24.0"
+  },
+  "devDependencies": {
+    "@pyoner/svelte-types": "^3.4.4-2",
+    "@types/meteor": "^1.4.40",
+    "@types/mocha": "^5.2.7",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.3.0",
+    "typescript": "^3.8.2"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.ts",
+      "server": "server/main.ts"
+    },
+    "testModule": "tests/main.ts"
+  }
+}
