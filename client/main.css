@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
+
 :root {
-  font-size: 10px;
+  --font-family: 'Lato', sans-serif;
+  --app-font-size: 10px;
+  --form-element-border-radius: 0.2rem;
+  --form-element-border-width: 0.12rem;
+  --form-element-font-size: 1.3rem;
+  --strong-color: #F2C744;
+  --strong-color-dark: #735620;
+  --light-color: #eeeeee;
+  font-size: var(--app-font-size);
 }
 
 *, *::after, *::before {
@@ -7,12 +17,49 @@
 }
 
 body {
-  padding: 1rem;
-  font-family: sans-serif;
+  padding: 2rem;
+  margin: 0;
+  font-family: var(--font-family);
 }
 
-input {
-  padding: 0;
+h1, h2, h3, h4, h5, h6,
+p, span, button, input, form,
+b, strong, em, small, sub {
+  font-family: var(--font-family);
+}
+
+input[type="text"], input[type="textarea"],
+input[type="email"], input[type="password"],
+input[type="number"], input[type="search"],
+input[type="tel"], input[type="url"] {
+  padding: 0.4em 0.7em;
   min-width: 0;
-  font-size: 1.8rem;
+  font-size: var(--form-element-font-size);
+  font-weight: 300;
+  border: var(--form-element-border-width) solid lightgray;
+  border-radius: var(--form-element-border-radius);
+  -webkit-appearance: none;
+}
+
+button {
+  font-size: var(--form-element-font-size);
+  height: fit-content;
+  background: white;
+  border: var(--form-element-border-width) solid var(--strong-color);
+  padding: 0.4em 1em;
+  border-radius: var(--form-element-border-radius);
+}
+
+@media only screen and (min-width: 375px) {
+  :root {
+    --app-font-size: 12px;
+    --form-element-border-width: 0.18rem;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  :root {
+    --app-font-size: 14px;
+    --form-element-border-width: 0.17rem;
+  }
 }

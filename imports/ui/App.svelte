@@ -20,14 +20,6 @@
 </script>
 
 <style>
-    :global(button) {
-        font-size: 1.6rem;
-        background: white;
-        border: 0.2rem solid steelblue;
-        padding: 0.4rem 1rem;
-        border-radius: 0.3rem;
-    }
-
     .userSection {
         display: flex;
         align-items: center;
@@ -36,17 +28,36 @@
 
     h1 {
         display: inline-block;
-        font-size: 2.5rem;
-        padding-right: 1rem;
-        font-weight: 200;
+        font-size: 1.6rem;
+        padding-right: 1em;
+        margin: 0;
+        font-weight: 300;
     }
 
     section {
-        max-width: 45vw;
+        max-width: 100vw;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    @media only screen and (min-width: 640px) {
+        section {
+            max-width: 70vw;
+        }
+    }
+
+    @media only screen and (min-width: 1100px) {
+        section {
+            max-width: 50vw;
+        }
+    }
+
+    @media only screen and (min-width: 1600px) {
+        section {
+            max-width: 30vw;
+        }
     }
 
     form {
@@ -65,10 +76,8 @@
     ul {
         width: 100%;
         list-style: none;
-        padding: 2rem;
+        padding: 1rem 0;
         margin: 0;
-        background-color: lightgray;
-        border-radius: 0.3rem;
     }
 </style>
 
@@ -84,7 +93,7 @@
     <section>
         <form on:submit|preventDefault={handleSubmit}>
             <input type="text" placeholder="Add your resolution" bind:value={newRes} />
-            <button>Submit</button>
+            <button>Add new</button>
         </form>
         <ul>
             {#each $resolutions as resolution}
