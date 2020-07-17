@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
-import "../imports/api/resolutions";
+import {Resolutions} from "../imports/api/resolutions";
 
 Meteor.startup((): void => {
-  // startup code on server
+    // startup code on server
+    console.log(Resolutions.find().count());
 });

@@ -1,14 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
 
 :root {
+  /* font */
   --font-family: 'Lato', sans-serif;
   --app-font-size: 10px;
+  /* measures */
   --form-element-border-radius: 0.2rem;
   --form-element-border-width: 0.12rem;
   --form-element-font-size: 1.3rem;
-  --strong-color: #F2C744;
-  --strong-color-dark: #735620;
-  --light-color: #eeeeee;
+  /* colors */
+  --yellow-main: #F2C744;
+  --yellow-dark: #735620;
+  --yellow-harsh: #F2E963;
+  --yellow-main-light: #F2D750;
+  --yellow-main-fading: #F2E291; 
+  --green-dark-harsh: #0E6542;
+  --green-light: #68E9B5;
+  --green-harsh: #20E595;
+  --green-dark: #2D654E;
+  --green-pastel: #19B274;
+  --light-gray: #eeeeee;
+  --dark-gray: #dadada;
   font-size: var(--app-font-size);
 }
 
@@ -28,6 +40,10 @@ b, strong, em, small, sub {
   font-family: var(--font-family);
 }
 
+i {
+  font-style: normal;
+}
+
 input[type="text"], input[type="textarea"],
 input[type="email"], input[type="password"],
 input[type="number"], input[type="search"],
@@ -45,7 +61,7 @@ button {
   font-size: var(--form-element-font-size);
   height: fit-content;
   background: white;
-  border: var(--form-element-border-width) solid var(--strong-color);
+  border: var(--form-element-border-width) solid var(--yellow-main);
   padding: 0.4em 1em;
   border-radius: var(--form-element-border-radius);
 }
