@@ -3,6 +3,6 @@ import App from "../imports/ui/App.svelte";
 
 Meteor.startup((): void => {
     new App({
-      target: document.getElementById("app")!,
+      target: document.getElementById("app") || document.body,
     });
 });
