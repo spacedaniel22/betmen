@@ -1,4 +1,5 @@
-<script>
+<script>import { debug } from "svelte/internal";
+
     import { Resolutions } from "../api/resolutions";
     import { beforeUpdate } from "svelte"
     import CustomCheckbox from "./CustomCheckbox.svelte";
@@ -10,20 +11,17 @@
     $: isTitleSame = updateResolutionName === resolution.title;
 
     function deleteResolution() {
-        Resolutions.remove(resolution._id);
-        inEdit = false;
+        Meteor.call("deleteResolution", resolution._id);
     }
 
-    function handleUpdate(event) {
-        inEdit = false;
+    function handleTitleUpdate(event) {
         if (!updateResolutionName.replace(/\s/g, '') || isTitleSame) {
+            inEdit = false;
             return;
         }
-        Resolutions.update(
-            { _id: resolution._id },
-            { ...resolution, title: updateResolutionName },
-        );
-        updateResolutionName = "";
+        Meteor.call("updateResolution", { ...resolution, title: updateResolutionName }, () => {
+            inEdit = false;
+        });
     }
 
     function toggleEdit() {
@@ -32,12 +30,10 @@
     }
 
     function toggleChecked() {
-        inEdit = false;
-        updateResolutionName = "";
-        Resolutions.update(
-            { _id: resolution._id },
-            { ...resolution, completed: !resolution.completed },
-        );
+        if (inEdit) {
+            toggleEdit();
+        }
+        Meteor.call("updateResolution", { ...resolution, completed: !resolution.completed });
     }
 </script>
 
@@ -124,7 +120,7 @@
         onChange={toggleChecked}
     />
     {#if inEdit}
-        <form on:submit|preventDefault={handleUpdate}>
+        <form on:submit|preventDefault={handleTitleUpdate}>
             <input type="text" class="title" bind:value={updateResolutionName} />
         </form>
     {:else}
@@ -137,7 +133,7 @@
     {/if}
     <div class="icons">
         {#if inEdit}
-            <div class="icon-button" on:click={handleUpdate}><i>👌</i></div>
+            <div class="icon-button" on:click={handleTitleUpdate}><i>👌</i></div>
             <div class="icon-button" on:click={toggleEdit}><i>✖︎</i></div>
         {:else}
             <div class="icon-button" on:click={toggleEdit}><i>✏️</i></div>

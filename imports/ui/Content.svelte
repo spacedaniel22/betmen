@@ -1,24 +1,22 @@
 <script>
+    import { onMount } from "svelte";
     import { useTracker } from "meteor/rdb:svelte-meteor-data";
     import ResolutionContainer from "./ResolutionContainer.svelte";
     import { Resolutions } from "../api/resolutions";
 
-    export let user;
-
     let newRes = "";
-    $: resolutions = useTracker(() => Resolutions.find({userId: user._id}).fetch());
+    $: resolutions = useTracker(() => Resolutions.find({}).fetch());
     $: completedResolutions = $resolutions.filter((r) => r.completed);
     $: todoResolutions = $resolutions.filter((r) => !r.completed);
-
+    
+    onMount(() => {
+        Meteor.subscribe("getResolutionsForUser");
+    });
     function handleSubmit(event) {
         if (!newRes) {
             return;
         }
-        Resolutions.insert({
-            title: newRes,
-            completed: false,
-            userId: user._id,
-        });
+        Meteor.call("insertResolution", newRes);
         newRes = "";
     }
 </script>

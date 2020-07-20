@@ -38,6 +38,6 @@
         {/if}
     </div>
     {#if $user}
-        <Content user={$user} />
+        <Content />
     {/if}
 </main>
