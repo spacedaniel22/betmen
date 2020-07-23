@@ -35,6 +35,10 @@
         }
         Meteor.call("updateResolution", { ...resolution, completed: !resolution.completed });
     }
+
+    function putOnFocus(node) {
+        node.focus();
+    }
 </script>
 
 <style>
@@ -51,7 +55,7 @@
         min-height: 5rem;
         padding-bottom: 2rem;
         margin-bottom: 2rem;
-        border-bottom: var(--form-element-border-width) solid var(--yellow-main);
+        border-bottom: var(--form-element-border-width) solid var(--dark-gray);
     }
 
     .item:last-of-type {
@@ -63,6 +67,10 @@
         font-size: var(--title-font-size);
         flex: 1 1;
         font-weight: 500;
+    }
+    
+    .title.displaying {
+        cursor: text;
         color: var(--yellow-main-dark);
     }
 
@@ -75,8 +83,18 @@
     }
 
     input {
-        padding-left: 0;
+        position: relative;
+        padding: 0.5rem 0.5rem 0.5rem 0;
         width: 100%;
+        border-radius: 0;
+        border: none;
+        outline: var(--form-element-border-width) dashed var(--light-gray);
+        color: var(--green-dark-harsh);
+        transition: all ease-in-out 0.2s;
+    }
+    
+    input:focus {
+        outline-color: var(--dark-gray);
     }
 
     .icons {
@@ -112,6 +130,10 @@
     i {
         font-size: 0.8em;
     }
+
+    .cancel i {
+        color: var(--yellow-dark);
+    }
 </style>
 
 <div class="item">
@@ -121,12 +143,18 @@
     />
     {#if inEdit}
         <form on:submit|preventDefault={handleTitleUpdate}>
-            <input type="text" class="title" bind:value={updateResolutionName} />
+            <input
+                type="text"
+                class="title"
+                bind:value={updateResolutionName}
+                use:putOnFocus
+            />
         </form>
     {:else}
         <span
             class="title displaying"
             class:completed={resolution.completed}
+            on:click={toggleEdit}
         >
             {resolution.title}
         </span>
@@ -134,9 +162,8 @@
     <div class="icons">
         {#if inEdit}
             <div class="icon-button" on:click={handleTitleUpdate}><i>👌</i></div>
-            <div class="icon-button" on:click={toggleEdit}><i>✖︎</i></div>
+            <div class="icon-button cancel" on:click={toggleEdit}><i>✖︎</i></div>
         {:else}
-            <div class="icon-button" on:click={toggleEdit}><i>✏️</i></div>
             <div class="icon-button" on:click={deleteResolution}><i>🗑</i></div>
         {/if}
     </div>
