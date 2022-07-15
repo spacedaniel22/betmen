@@ -11,7 +11,7 @@
     "@babel/runtime": "^7.10.5",
     "bcrypt": "^5.0.0",
     "meteor-node-stubs": "^1.0.0",
-    "svelte": "^3.24.0"
+    "svelte": "^3.49.0"
   },
   "devDependencies": {
     "@pyoner/svelte-types": "^3.4.4-2",
